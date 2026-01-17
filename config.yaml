@@ -1,0 +1,43 @@
+system:
+  environment: "experiment"
+  debug_mode: true
+  log_level: "INFO"
+
+orchestrator:
+  host: "0.0.0.0"
+  port: 8000
+
+input_defense:
+  vector_shield:
+    enabled: true
+    threshold: 0.6
+    model_name: "all-MiniLM-L6-v2"
+    db_path: "./experiments/data/vector_db"
+
+context:
+  ehr_database_path: "./experiments/data/ehr_mock.json"
+
+# Enable/disable context scanning (for Experiment 4: Gap Analysis)
+context_scanning:
+  enabled: true
+  threshold: 0.65  # Same model as input defense for consistency
+  scan_ehr_data: true
+
+llm:
+  provider: "groq" 
+  model_name: "llama-3.3-70b-versatile"
+  max_tokens: 1024
+  temperature: 0.0
+  api_key_env: "GROQ_API_KEY"
+
+guardrails:
+  regex_scrubber:
+    enabled: true
+  medical_consistency:
+    enabled: true
+  toxicity_filter:
+    enabled: true
+
+logging:
+  audit_log_path: "./experiments/logs/audit.jsonl"
+  metrics_path: "./experiments/logs/metrics.csv"

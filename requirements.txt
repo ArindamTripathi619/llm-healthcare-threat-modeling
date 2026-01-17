@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sentence-transformers
+numpy
+chromadb
+openai
+python-dotenv
+pyyaml
+pandas
+httpx
+pytest
+groq
