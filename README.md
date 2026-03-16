@@ -157,8 +157,9 @@ cd llm-healthcare-threat-modeling
 # Install dependencies
 pip install -r requirements.txt
 
-# Set your API key
-export GROQ_API_KEY="your_key_here"
+# Set your API key in .env (see .env.example for template)
+cp .env.example .env
+nano .env 
 ```
 
 ### Running the Orchestrator
