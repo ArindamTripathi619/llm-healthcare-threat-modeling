@@ -25,7 +25,7 @@ def run_batch():
         return
 
     # Prepare CSV
-    with open(RESULTS_PATH, "w", newline="") as f:
+    with open(OUTPUT_LOG, "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["timestamp", "id", "category", "attack_type", "prompt", "expected", "actual_status", "latency_ms", "pass"])
 
@@ -86,7 +86,7 @@ def run_batch():
                 is_pass = True
             
             # Log to CSV immediately
-            with open(RESULTS_PATH, "a", newline="") as f:
+            with open(OUTPUT_LOG, "a", newline="") as f:
                 writer = csv.writer(f)
                 writer.writerow([
                     datetime.now().isoformat(),
@@ -103,7 +103,7 @@ def run_batch():
             # Rate limit to be nice to Groq API
             time.sleep(1.0) 
 
-    logger.info(f"Batch run complete. Results saved to {RESULTS_PATH}")
+    logger.info(f"Batch run complete. Results saved to {OUTPUT_LOG}")
 
 if __name__ == "__main__":
     run_batch()

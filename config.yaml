@@ -1,10 +1,10 @@
 context:
   ehr_database_path: ./data/ehr_mock.json
 context_scanning:
-  enabled: true
+  enabled: false
+  model_name: all-MiniLM-L6-v2
   scan_ehr_data: true
   threshold: 0.65
-  model_name: all-MiniLM-L6-v2
 guardrails:
   medical_consistency:
     enabled: true
@@ -14,13 +14,13 @@ guardrails:
     enabled: true
 input_defense:
   vector_shield:
-    db_path: ./experiments/data/vector_db
+    db_path: ./data/vector_db
     enabled: true
     fail_mode: closed
     model_name: all-MiniLM-L6-v2
     threshold: 0.6
 llm:
-  api_key_env: ''
+  api_key_env: LITELLM_KEY
   base_url: http://localhost:8000/v1
   max_tokens: 1024
   model_name: groq-llama

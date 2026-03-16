@@ -33,3 +33,6 @@ ENV/
 # Project specific
 .DS_Store
 .ipynb_checkpoints/
+venv_new/
+nohup.out
+logs/

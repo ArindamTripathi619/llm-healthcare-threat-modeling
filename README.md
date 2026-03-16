@@ -13,7 +13,7 @@ This repository corresponds to the experimental validation described in:
 
 **"Threat Modeling Secure LLM Orchestration in Healthcare: Evaluating Prompt Injection Defenses in a Simulated Clinical Environment"**
 
-**Authors:** Arindam Tripathi, Arghya Bose  
+**Authors:** Arindam Tripathi, Arghya Bose, Soham Deb  
 **Supervised by:** Dr. Sushruta Mishra *(Faculty, School of Computer Engineering, KIIT University)*  
 **Paper Version:** Results in this repository represent the experimental validation conducted in 2025–2026.
 
@@ -202,6 +202,7 @@ All experimental parameters are controlled via `config.yaml`. Key knobs:
 
 - **Arindam Tripathi** — *Lead Researcher* — [Arindamtripathi619](https://github.com/Arindamtripathi619)
 - **Arghya Bose** — *Researcher* — [officialarghya29](https://github.com/officialarghya29)
+- **Soham Deb** — *Researcher*
 
 **Supervised by:**
 - **Dr. Sushruta Mishra** — *Faculty, School of Computer Engineering, KIIT University*

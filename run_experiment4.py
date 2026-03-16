@@ -11,30 +11,49 @@ import subprocess
 import time
 import yaml
 import json
+import os
 import pandas as pd
+
+RESULTS_FILE_PATH = "reports/experiment4_comparison.csv"
 
 def update_config(context_scanning_enabled):
     """Update config.yaml with context_scanning toggle"""
-    with open("experiments/config.yaml", "r") as f:
+    with open("config.yaml", "r") as f:
         config = yaml.safe_load(f)
     
     config["context_scanning"]["enabled"] = context_scanning_enabled
     
-    with open("experiments/config.yaml", "w") as f:
+    with open("config.yaml", "w") as f:
         yaml.dump(config, f, default_flow_style=False)
     
     print(f"Updated config: context_scanning.enabled = {context_scanning_enabled}")
 
 def run_orchestrator():
-    """Start orchestrator in background"""
+    """Start orchestrator in background and wait for it to be ready"""
     proc = subprocess.Popen(
-        ["venv/bin/uvicorn", "experiments.orchestrator.main:app", "--host", "127.0.0.1", "--port", "8001"],
+        ["venv/bin/uvicorn", "orchestrator.main:app", "--host", "127.0.0.1", "--port", "8001"],
         stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL
+        stderr=subprocess.DEVNULL,
+        env={**os.environ, "LITELLM_KEY": os.getenv("LITELLM_KEY", "sk-local")}
     )
-    print(f"Started orchestrator (PID: {proc.pid})")
-    time.sleep(10)  # Wait for startup
-    return proc
+    print(f"Started orchestrator (PID: {proc.pid}). Waiting for readiness...")
+    
+    # Poll for readiness
+    import httpx
+    for i in range(45): # Wait up to 90 seconds
+        try:
+            with httpx.Client() as client:
+                resp = client.get("http://127.0.0.1:8001/docs")
+                if resp.status_code == 200:
+                    print("Server is UP!")
+                    return proc
+        except Exception:
+            pass
+        time.sleep(2)
+    
+    print("Server failed to start in time.")
+    proc.terminate()
+    return None
 
 def run_tests():
     """Run indirect injection test cases"""
