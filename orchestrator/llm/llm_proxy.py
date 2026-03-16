@@ -7,7 +7,7 @@ from openai import OpenAI
 from dotenv import load_dotenv
 
 # Load .env explicitly now
-load_dotenv("experiments/.env")
+load_dotenv(".env")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

@@ -120,7 +120,7 @@ for _ in range(10):
 # Shuffle
 random.shuffle(dataset)
 
-with open("experiments/data/test_dataset_large.json", "w") as f:
+with open("data/test_dataset_large.json", "w") as f:
     json.dump(dataset, f, indent=2)
 
-print(f"Generated {len(dataset)} test cases in experiments/data/test_dataset_large.json using Faker")
+print(f"Generated {len(dataset)} test cases in data/test_dataset_large.json using Faker")

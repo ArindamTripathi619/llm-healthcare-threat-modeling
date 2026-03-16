@@ -6,8 +6,8 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("Analysis")
 
-INPUT_FILE = "experiments/logs/metric_report_raw.csv"
-OUTPUT_FILE = "experiments/reports/final_metrics.md"
+INPUT_FILE = "logs/metric_report_raw.csv"
+OUTPUT_FILE = "reports/final_metrics.md"
 
 def generate_report():
     try:

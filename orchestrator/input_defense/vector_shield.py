@@ -35,7 +35,7 @@ class VectorShield:
 
     def _load_attack_corpus(self):
         try:
-            with open("experiments/data/known_attacks.json", "r") as f:
+            with open("data/known_attacks.json", "r") as f:
                 self.known_attacks = json.load(f)
             
             if self.known_attacks:

@@ -11,8 +11,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger("BatchRunner")
 
 ORCHESTRATOR_URL = "http://127.0.0.1:8001/generate"
-DATASET_PATH = "experiments/data/test_dataset_large.json"
-RESULTS_PATH = "experiments/logs/metric_report_raw.csv"
+DATASET_PATH = "data/test_dataset_large.json"
+OUTPUT_LOG = "logs/metric_report_raw.csv"
 
 def run_batch():
     # Load Dataset

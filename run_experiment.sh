@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Log file
-LOG_FILE="experiments/logs/runner.log"
+LOG_FILE="logs/runner.log"
 exec > >(tee -a $LOG_FILE) 2>&1
 
 echo "Starting Orchestrator on port 8001..."
@@ -23,7 +23,7 @@ done
 # Run attacker
 echo "Running Attacker..."
 export ORCHESTRATOR_URL="http://127.0.0.1:8001/generate"
-PYTHONPATH=. venv/bin/python experiments/client/attacker.py
+PYTHONPATH=. venv/bin/python client/attacker.py
 
 # Cleanup
 echo "Killing Orchestrator ($PID)..."

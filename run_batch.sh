@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Configuration
-LOG_FILE="experiments/logs/batch_runner.log"
+LOG_FILE="logs/batch_runner.log"
 
 # Setup
-mkdir -p experiments/logs
+mkdir -p logs
 
 echo "Starting Orchestrator on port 8001..." | tee -a "$LOG_FILE"
 # Start Orchestrator in background
@@ -25,7 +25,7 @@ done
 
 # Run Batch Client
 echo "Running Batch Runner..." | tee -a "$LOG_FILE"
-PYTHONPATH=. venv/bin/python experiments/client/batch_runner.py 2>&1 | tee -a "$LOG_FILE"
+PYTHONPATH=. venv/bin/python client/batch_runner.py 2>&1 | tee -a "$LOG_FILE"
 
 # Cleanup
 echo "Experiment Complete. Killing Orchestrator ($SERVER_PID)..." | tee -a "$LOG_FILE"

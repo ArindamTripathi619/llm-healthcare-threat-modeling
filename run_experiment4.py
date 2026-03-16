@@ -125,9 +125,12 @@ def main():
     print(f"  Hardened:  {hardened_blocked}/3 = {hardened_blocked/3*100:.1f}%")
     print(f"  Improvement: +{(hardened_blocked - baseline_blocked)/3*100:.1f}%")
     
+    # Ensure the directory for results exists
+    os.makedirs(os.path.dirname(RESULTS_FILE_PATH), exist_ok=True)
+    
     # Save results
-    df_combined.to_csv("experiments/reports/experiment4_results.csv", index=False)
-    print("\nResults saved to: experiments/reports/experiment4_results.csv")
+    df_combined.to_csv(RESULTS_FILE_PATH, index=False)
+    print(f"\nResults saved to: {RESULTS_FILE_PATH}")
 
 if __name__ == "__main__":
     main()
