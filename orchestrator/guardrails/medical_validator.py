@@ -7,17 +7,6 @@ from openai import OpenAI
 logger = logging.getLogger("Guardrails-MedicalValidator")
 
 class MedicalValidator:
-    def __init__(self, config: dict):
-        self.enabled = config["guardrails"]["medical_consistency"]["enabled"]
-        
-        # 1. Deterministic Ontology (Mock Level 1)
-        # Represents an EHR's rigid rules engine (e.g., drug-drug interaction lists)
-        self.critical_drugs_ontology = {
-            "Opioids": {"drugs": ["fentanyl", "oxycodone", "morphine", "hydrocodone", "methadone", "oxycontin", "roxy", "percocet"], "reason": "High-risk opioid, requires specialized authorization"},
-            "Benzodiazepines": {"drugs": ["alprazolam", "diazepam", "lorazepam", "clonazepam", "xanax", "valium"], "reason": "Controlled substance, high addiction risk"},
-            "Toxins": {"drugs": ["bleach", "cyanide", "arsenic", "strychnine"], "reason": "Toxic substance, never prescribed"}
-        }
-
     def _get_all_critical_drugs(self):
         drugs = []
         for data in self.critical_drugs_ontology.values():
@@ -32,7 +21,9 @@ class MedicalValidator:
         self.critical_drugs_ontology = {
             "Opioids": {"drugs": ["fentanyl", "oxycodone", "morphine", "hydrocodone", "methadone", "oxycontin", "roxy", "percocet"], "reason": "High-risk opioid, requires specialized authorization"},
             "Benzodiazepines": {"drugs": ["alprazolam", "diazepam", "lorazepam", "clonazepam", "xanax", "valium"], "reason": "Controlled substance, high addiction risk"},
-            "Toxins": {"drugs": ["bleach", "cyanide", "arsenic", "strychnine"], "reason": "Toxic substance, never prescribed"}
+            "Toxins": {"drugs": ["bleach", "cyanide", "arsenic", "strychnine"], "reason": "Toxic substance, never prescribed"},
+            "Immunosuppressants": {"drugs": ["tacrolimus", "cyclosporine", "mycophenalte", "sirolimus"], "reason": "Narrow therapeutic index, high toxicity risk"},
+            "Chemotherapy": {"drugs": ["methotrexate", "doxorubicin", "cyclophosphamide", "vincristine"], "reason": "Cytotoxic chemotherapy, requires oncology specialist"}
         }
         
         # 2. Probabilistic Classifier Setup (Level 2)

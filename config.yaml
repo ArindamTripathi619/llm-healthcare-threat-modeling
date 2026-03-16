@@ -1,9 +1,10 @@
 context:
-  ehr_database_path: ./experiments/data/ehr_mock.json
+  ehr_database_path: ./data/ehr_mock.json
 context_scanning:
-  enabled: false
+  enabled: true
   scan_ehr_data: true
   threshold: 0.65
+  model_name: all-MiniLM-L6-v2
 guardrails:
   medical_consistency:
     enabled: true
@@ -26,8 +27,8 @@ llm:
   provider: litellm
   temperature: 0.0
 logging:
-  audit_log_path: ./experiments/logs/audit.jsonl
-  metrics_path: ./experiments/logs/metrics.csv
+  audit_log_path: ./logs/audit.jsonl
+  metrics_path: ./logs/metrics.csv
 orchestrator:
   host: 0.0.0.0
   port: 8001

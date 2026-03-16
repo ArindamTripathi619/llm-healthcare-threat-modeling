@@ -13,7 +13,7 @@ def test_context_scanning():
     # Start orchestrator
     print("Starting orchestrator...")
     proc = subprocess.Popen(
-        ['venv/bin/uvicorn', 'experiments.orchestrator.main:app', '--host', '127.0.0.1', '--port', '8001'],
+        ['venv/bin/uvicorn', 'orchestrator.main:app', '--host', '127.0.0.1', '--port', '8001'],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -132,7 +132,7 @@ def test_context_scanning():
     print(f"  Indirect Injection Block Rate: {indirect_blocked}/3 = {indirect_blocked/3*100:.1f}%")
     
     # Save results
-    with open("experiments/reports/experiment4_manual_verification.json", "w") as f:
+    with open("reports/experiment4_manual_verification.json", "w") as f:
         json.dump({
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "config": "context_scanning=true",

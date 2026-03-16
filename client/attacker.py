@@ -4,7 +4,7 @@ import json
 import csv
 import logging
 from typing import List, Dict
-from experiments.client.attack_corpus import ATTACK_CORPUS
+from client.attack_corpus import ATTACK_CORPUS
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -13,7 +13,7 @@ logger = logging.getLogger("ExperimentRunner")
 ORCHESTRATOR_URL = "http://127.0.0.1:8001/generate"
 
 class ExperimentRunner:
-    def __init__(self, output_file="experiments/logs/experiment_results.csv"):
+    def __init__(self, output_file="logs/experiment_results.csv"):
         self.output_file = output_file
         # Initialize CSV
         with open(self.output_file, 'w', newline='') as f:

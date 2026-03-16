@@ -40,7 +40,7 @@ def check_attack_corpus(patient_ids):
 
 def check_known_attacks():
     """Verify known_attacks.json is non-empty."""
-    path = "experiments/data/known_attacks.json"
+    path = "data/known_attacks.json"
     try:
         with open(path, "r") as f:
             attacks = json.load(f)
@@ -57,7 +57,7 @@ def check_known_attacks():
 def check_config():
     """Verify config.yaml has all required keys."""
     try:
-        with open("experiments/config.yaml", "r") as f:
+        with open("config.yaml", "r") as f:
             config = yaml.safe_load(f)
         
         required_keys = [
@@ -93,7 +93,7 @@ def check_config():
 def check_env(config):
     """Verify API key is set (if required by provider)."""
     from dotenv import load_dotenv
-    load_dotenv("experiments/.env")
+    load_dotenv(".env")
     
     provider = config["llm"].get("provider", "")
     api_key_env = config["llm"].get("api_key_env", "")
@@ -130,7 +130,7 @@ def check_env(config):
 
 def check_test_dataset():
     """Verify test_dataset_large.json exists and has expected structure."""
-    path = "experiments/data/test_dataset_large.json"
+    path = "data/test_dataset_large.json"
     try:
         with open(path, "r") as f:
             dataset = json.load(f)

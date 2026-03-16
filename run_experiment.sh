@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Log file
-LOG_FILE="experiments/logs/runner.log"
+LOG_FILE="logs/runner.log"
 exec > >(tee -a $LOG_FILE) 2>&1
 
 echo "Starting Orchestrator on port 8001..."
-venv/bin/uvicorn experiments.orchestrator.main:app --host 127.0.0.1 --port 8001 &
+venv/bin/uvicorn orchestrator.main:app --host 127.0.0.1 --port 8001 &
 PID=$!
 echo "Orchestrator PID: $PID"
 
@@ -23,7 +23,7 @@ done
 # Run attacker
 echo "Running Attacker..."
 export ORCHESTRATOR_URL="http://127.0.0.1:8001/generate"
-PYTHONPATH=. venv/bin/python experiments/client/attacker.py
+PYTHONPATH=. venv/bin/python client/attacker.py
 
 # Cleanup
 echo "Killing Orchestrator ($PID)..."

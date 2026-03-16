@@ -8,6 +8,7 @@ __pycache__/
 *.so
 .Python
 env/
+.agent/
 build/
 develop-eggs/
 dist/

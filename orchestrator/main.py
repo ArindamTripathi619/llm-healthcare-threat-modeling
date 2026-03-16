@@ -5,29 +5,33 @@ import time
 import uuid
 
 # Import components
-from experiments.orchestrator.input_defense.vector_shield import VectorShield
-from experiments.orchestrator.context.ehr_simulator import EHRSimulator
-from experiments.orchestrator.llm.llm_proxy import LLMProxy
-from experiments.orchestrator.guardrails.sanitizer import Sanitizer
-from experiments.orchestrator.guardrails.medical_validator import MedicalValidator
-from experiments.orchestrator.guardrails.policy_filter import PolicyFilter
-from experiments.orchestrator.logging.audit_log import AuditLogger
-from experiments.orchestrator.metrics.metrics_collector import MetricsCollector
+from orchestrator.input_defense.vector_shield import VectorShield
+from orchestrator.context.ehr_simulator import EHRSimulator
+from orchestrator.llm.llm_proxy import LLMProxy
+from orchestrator.guardrails.sanitizer import Sanitizer
+from orchestrator.guardrails.medical_validator import MedicalValidator
+from orchestrator.guardrails.policy_filter import PolicyFilter
+from orchestrator.logging.audit_log import AuditLogger
+from orchestrator.metrics.metrics_collector import MetricsCollector
 import yaml
 import logging
 
 logger = logging.getLogger("Orchestrator")
 
 # Load configuration
-with open("experiments/config.yaml", "r") as f:
+CONFIG_PATH = "config.yaml"
+with open(CONFIG_PATH, "r") as f:
     config = yaml.safe_load(f)
 
 app = FastAPI(title="Secure LLM Orchestrator Experiment")
 
 # Add CORS Middleware
+# WARNING: In a production environment with sensitive healthcare data (PHI),
+# never use allow_origins=["*"]. Restrict this to trusted clinical domains.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"], # Restrict to common local dev ports
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
