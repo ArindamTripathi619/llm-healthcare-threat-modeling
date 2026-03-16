@@ -1,9 +1,10 @@
 context:
   ehr_database_path: ./data/ehr_mock.json
 context_scanning:
-  enabled: false
+  enabled: true
   scan_ehr_data: true
   threshold: 0.65
+  model_name: all-MiniLM-L6-v2
 guardrails:
   medical_consistency:
     enabled: true
