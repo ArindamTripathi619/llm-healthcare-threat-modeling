@@ -5,7 +5,7 @@ LOG_FILE="logs/runner.log"
 exec > >(tee -a $LOG_FILE) 2>&1
 
 echo "Starting Orchestrator on port 8001..."
-venv/bin/uvicorn experiments.orchestrator.main:app --host 127.0.0.1 --port 8001 &
+venv/bin/uvicorn orchestrator.main:app --host 127.0.0.1 --port 8001 &
 PID=$!
 echo "Orchestrator PID: $PID"
 

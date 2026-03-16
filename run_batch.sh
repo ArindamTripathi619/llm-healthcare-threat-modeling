@@ -8,7 +8,7 @@ mkdir -p logs
 
 echo "Starting Orchestrator on port 8001..." | tee -a "$LOG_FILE"
 # Start Orchestrator in background
-nohup venv/bin/uvicorn experiments.orchestrator.main:app --host 127.0.0.1 --port 8001 > nohup.out 2>&1 &
+nohup venv/bin/uvicorn orchestrator.main:app --host 127.0.0.1 --port 8001 > nohup.out 2>&1 &
 SERVER_PID=$!
 echo "Orchestrator PID: $SERVER_PID" | tee -a "$LOG_FILE"
 
